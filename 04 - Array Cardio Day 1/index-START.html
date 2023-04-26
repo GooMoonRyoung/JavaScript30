@@ -38,17 +38,54 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    for (let x in inventors){
+      if (inventors[x].year >= 1500 && inventors[x].year < 1600){
+        console.log(inventors[x])
+      }
+    }
+    const inventor1500 =  inventors.filter(inventor => {
+      if (inventor.year >= 1500 && inventor.year < 1600){
+        console.log(inventor)
+      }
+    })
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const inventorsNames = inventors.map(inventor => {
+      let inventorName = {
+        first: inventor.first,
+        last: inventor.last
+      }
+      return inventorName
+    }) 
+    console.log(inventorsNames)
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    let oldest = inventors.sort((a, b) => {
+      if (b.year > a.year) {
+        return -1
+      } else{
+        return 1
+      }
+    })
+    console.log(oldest)
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
-
+    let initValue = 0
+    sumOfAges = inventors.reduce((a ,b) => {
+      return a + (b.passed - b.year)  
+    }, 0)
+    console.log(sumOfAges)
     // 5. Sort the inventors by years lived
+    let longestLived = inventors.sort((a, b) => {
+      if ((b.passed - b.year) > (a.passed - a.year)) {
+        return -1
+      } else{
+        return 1
+      }
+    })
+    console.log(longestLived)
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
@@ -56,10 +93,27 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-
+    function swapNames(list) {
+    for (let x in list){
+      let name = list[x].split(', ')
+      name = `${name[1]}, ${name[0]}`
+      list[x] = name 
+    }}
+    //swapNames(people)
+    people.sort()
+    //swapNames(people)
+    console.log(people)
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    let transportation = data.reduce((a, b) => {
+      return a + b}, '')
+    let carCount = transportation.match(/car/g)
+    let vanCount = transportation.match(/van/g)
+    let bikeCount = transportation.match(/bike/g)
+    let truckCount = transportation.match(/truck/g)
+    let walkCount = transportation.match(/walk/g)
+    console.log(carCount.length, vanCount.length, bikeCount.length, truckCount.length, walkCount.length)
 
   </script>
 </body>
